@@ -1,5 +1,7 @@
 package Map;
 
+import java.util.Objects;
+
 public class StudentDTO {
 	//선생님 풀이법
 	private Long id; //관리번호
@@ -11,6 +13,8 @@ public class StudentDTO {
 	private String studentName;   // 이름
 	private String studentMajor;  // 전공
 	private String studentMobile;  // 전화번호
+	
+	// String <- 데이터(ex.int) 타입이 아닌 객체 class타입임
 	
 	public Long getId() {
 		return id;
@@ -48,6 +52,28 @@ public class StudentDTO {
 		return "StudentDTO [id=" + id + ", studentNumber=" + studentNumber + ", studentName=" + studentName
 				+ ", studentMajor=" + studentMajor + ", studentMobile=" + studentMobile + "]";
 	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, studentMajor, studentMobile, studentName, studentNumber);
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		StudentDTO other = (StudentDTO) obj;
+		return Objects.equals(id, other.id) && Objects.equals(studentMajor, other.studentMajor)
+				&& Objects.equals(studentMobile, other.studentMobile) && Objects.equals(studentName, other.studentName)
+				&& Objects.equals(studentNumber, other.studentNumber);
+	}
+	// 두 객체의 필드값이 모두 일치하는지에 대한 비교가 필요할때 추가해주는 메소드, 
+	// hashcode()와 equals() 메소드를 재정의 해줘야함
+	// 아니면 하나하나 비교할수밖에 없음
+	
 	
 	
 	
